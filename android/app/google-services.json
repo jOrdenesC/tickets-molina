@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "916414703858",
+    "firebase_url": "https://seguridad-21fe5-default-rtdb.firebaseio.com",
+    "project_id": "seguridad-21fe5",
+    "storage_bucket": "seguridad-21fe5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916414703858:android:14291d158615108ac9086b",
+        "android_client_info": {
+          "package_name": "com.molina.seguridad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916414703858-vd714fdqnn46qbtropq0pvrqucvgqeed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqJX4KTdWyuuM5E6uiOplLb5C3Tni8qEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916414703858-u8l0qikn4gbuafk0r9t2vmq1s9155b81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
