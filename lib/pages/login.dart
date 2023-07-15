@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,138 +25,171 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController mail = TextEditingController();
   TextEditingController pass = TextEditingController();
+
+  Future<bool> _pop() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('¿Cerrar app?'),
+          content: const Text('¿Estás seguro que deseas cerrar la app?'),
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancelar',
+                    style: TextStyle(color: Colors.black))),
+            TextButton(
+              onPressed: () async {
+                SystemNavigator.pop();
+              },
+              child: Text('Cerrar app',
+                  style: TextStyle(color: Colors.red.shade800)),
+            ),
+          ],
+        );
+      },
+    );
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned(
-            bottom: 20.0.h,
-            top: -70.0.h,
-            left: -100.0.w,
-            right: 100.0.w,
-            child: Transform.rotate(
-              angle: math.pi / 2,
-              child: ClipPath(
-                clipper: ClipperImage(),
-                child: FadeIn(
-                  child: Container(
-                      width: 100.0.w,
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          gradient: LinearGradient(colors: [
-                            Colors.red,
-                            Colors.red.shade400,
-                            Colors.red.shade600
-                          ]))),
+    return WillPopScope(
+      onWillPop: _pop,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Positioned(
+              bottom: 20.0.h,
+              top: -70.0.h,
+              left: -100.0.w,
+              right: 100.0.w,
+              child: Transform.rotate(
+                angle: math.pi / 2,
+                child: ClipPath(
+                  clipper: ClipperImage(),
+                  child: FadeIn(
+                    child: Container(
+                        width: 100.0.w,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            gradient: LinearGradient(colors: [
+                              Colors.red,
+                              Colors.red.shade400,
+                              Colors.red.shade600
+                            ]))),
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 60.0.h,
-            bottom: -10.0.h,
-            right: -60.0.w,
-            left: 55.0.w,
-            child: Transform.rotate(
-              angle: math.pi / 1,
-              child: ClipPath(
-                clipper: ClipperImage(),
-                child: Stack(
-                  children: [
-                    FadeIn(
-                      child: Container(
-                        width: 100.0.w,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                          Colors.red,
-                          Colors.red.shade400,
-                          Colors.red.shade600
-                        ])),
+            Positioned(
+              top: 60.0.h,
+              bottom: -10.0.h,
+              right: -60.0.w,
+              left: 55.0.w,
+              child: Transform.rotate(
+                angle: math.pi / 1,
+                child: ClipPath(
+                  clipper: ClipperImage(),
+                  child: Stack(
+                    children: [
+                      FadeIn(
+                        child: Container(
+                          width: 100.0.w,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Colors.red,
+                            Colors.red.shade400,
+                            Colors.red.shade600
+                          ])),
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: SingleChildScrollView(
+                physics:
+                    const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30.0.h,
                     ),
+                    Image.asset(
+                      'assets/logo-apaisado-alta.jpg',
+                      width: 80.0.w,
+                    ),
+                    SizedBox(
+                      height: 4.0.h,
+                    ),
+                    field(
+                        mail,
+                        'Ingresa tu correo',
+                        Icon(
+                          Icons.mail,
+                          color: Colors.red,
+                          size: 7.0.w,
+                        ),
+                        false),
+                    SizedBox(
+                      height: 3.0.h,
+                    ),
+                    field(
+                        pass,
+                        'Ingresa tu contraseña',
+                        Icon(
+                          Icons.key,
+                          color: Colors.red,
+                          size: 7.0.w,
+                        ),
+                        true),
+                    SizedBox(
+                      height: 5.0.h,
+                    ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)))),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.red),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(80.0.w, 7.0.h))),
+                        onPressed: () {
+                          auth();
+                        },
+                        child: Text(
+                          'Iniciar sesión',
+                          style: TextStyle(
+                              fontSize: 20.0.sp, fontWeight: FontWeight.bold),
+                        )),
+                    Container(
+                      height: 15.0.h,
+                    ),
+                    Text(
+                      'Molina, ${DateTime.now().year}',
+                      style: TextStyle(
+                          fontSize: 16.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                    SizedBox(
+                      height: 3.0.h,
+                    )
                   ],
                 ),
               ),
             ),
-          ),
-          Center(
-            child: SingleChildScrollView(
-              physics:
-                  const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 30.0.h,
-                  ),
-                  Image.asset(
-                    'assets/logo-apaisado-alta.jpg',
-                    width: 80.0.w,
-                  ),
-                  SizedBox(
-                    height: 4.0.h,
-                  ),
-                  field(
-                      mail,
-                      'Ingresa tu correo',
-                      Icon(
-                        Icons.mail,
-                        color: Colors.red,
-                        size: 7.0.w,
-                      ),
-                      false),
-                  SizedBox(
-                    height: 3.0.h,
-                  ),
-                  field(
-                      pass,
-                      'Ingresa tu contraseña',
-                      Icon(
-                        Icons.key,
-                        color: Colors.red,
-                        size: 7.0.w,
-                      ),
-                      true),
-                  SizedBox(
-                    height: 5.0.h,
-                  ),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)))),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
-                          minimumSize:
-                              MaterialStateProperty.all(Size(80.0.w, 7.0.h))),
-                      onPressed: () {
-                        auth();
-                      },
-                      child: Text(
-                        'Iniciar sesión',
-                        style: TextStyle(
-                            fontSize: 20.0.sp, fontWeight: FontWeight.bold),
-                      )),
-                  Container(
-                    height: 15.0.h,
-                  ),
-                  Text(
-                    'Molina, ${DateTime.now().year}',
-                    style: TextStyle(
-                        fontSize: 16.0.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red),
-                  ),
-                  SizedBox(
-                    height: 3.0.h,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

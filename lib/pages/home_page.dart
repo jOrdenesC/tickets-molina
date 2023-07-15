@@ -1,9 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tickets/database/ticket.dart';
 import 'package:tickets/pages/view_ticket.dart';
+
+import '../database/users.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getMyId();
+    updateToken();
   }
 
   getMyId() async {
@@ -26,6 +30,16 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       myId = prefs.getString('uid')!;
     });
+  }
+
+  updateToken() async {
+    var prefs = await SharedPreferences.getInstance();
+    var token = await FirebaseMessaging.instance.getToken();
+
+    if (prefs.getString('uid')! != token) {
+      print('uid actualizado $token');
+      UsersDB().updateUser({'token': token!}, prefs.getString('uid')!);
+    }
   }
 
   @override

@@ -28,8 +28,8 @@ class _MainPageUserState extends State<MainPageUser> {
               iconUnselectedForegroundColor: Colors.white,
               iconBackgroundColor: Colors.red.shade900),
           icons: [
-            FluidNavBarIcon(icon: Icons.home),
-            FluidNavBarIcon(icon: Icons.settings),
+            FluidNavBarIcon(icon: Icons.home_outlined),
+            FluidNavBarIcon(icon: Icons.person_2_outlined),
           ]),
       body: PageView(
         physics: const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
