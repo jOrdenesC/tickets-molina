@@ -11,7 +11,7 @@ class TicketsDB {
     try {
       FirebaseFirestore.instance.collection('tickets').doc(id).update({
         'resolution': details,
-        'status': 'resolved',
+        'status': 'revision',
         'dateResolved': FieldValue.serverTimestamp()
       });
       return true;

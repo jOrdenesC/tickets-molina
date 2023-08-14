@@ -6,6 +6,7 @@ class Utils {
   alertNormal(String text, String title, BuildContext context) {
     MotionToast(
       width: 90.0.w,
+      height: 15.0.h,
       title: Text(
         title,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0.sp),

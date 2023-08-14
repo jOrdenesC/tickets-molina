@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tickets/database/printers.dart';
+import 'package:tickets/database/propertys.dart';
 import 'package:tickets/database/sectors.dart';
 import 'package:tickets/pages/finish_page.dart';
 
@@ -73,14 +75,15 @@ class _ViewTicketState extends State<ViewTicket> {
               height: 3.0.h,
             ),
             FutureBuilder(
-                future: SectorsDB().getNameSector(widget.data['idSectors']),
+                future: DepartmentsDB()
+                    .getNameDepartment(widget.data['department']),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const SizedBox.shrink();
                   }
                   return RichText(
                       text: TextSpan(
-                          text: 'Sector:',
+                          text: 'Departamento:',
                           style: TextStyle(
                               color: Colors.red.shade800,
                               fontSize: 16.0.sp,
@@ -94,24 +97,6 @@ class _ViewTicketState extends State<ViewTicket> {
                                 fontSize: 16.0.sp))
                       ]));
                 }),
-            SizedBox(
-              height: 3.0.h,
-            ),
-            RichText(
-                text: TextSpan(
-                    text: 'Ubicación:',
-                    style: TextStyle(
-                        color: Colors.red.shade800,
-                        fontSize: 16.0.sp,
-                        fontWeight: FontWeight.bold),
-                    children: [
-                  TextSpan(
-                      text: ' ${widget.data['address']}',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16.0.sp))
-                ])),
             SizedBox(
               height: 3.0.h,
             ),
@@ -131,7 +116,56 @@ class _ViewTicketState extends State<ViewTicket> {
                           fontWeight: FontWeight.w400,
                           fontSize: 16.0.sp))
                 ])),
-            // Text('Fecha: ${widget.data['date'].toDate()}'),
+            SizedBox(
+              height: 3.0.h,
+            ),
+            FutureBuilder(
+                future: PropertysDB().getNamePropertys(widget.data['property']),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox.shrink();
+                  }
+                  return RichText(
+                      text: TextSpan(
+                          text: 'Propiedad:',
+                          style: TextStyle(
+                              color: Colors.red.shade800,
+                              fontSize: 16.0.sp,
+                              fontWeight: FontWeight.bold),
+                          children: [
+                        TextSpan(
+                            text: ' ${snapshot.data}',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0.sp))
+                      ]));
+                }),
+            SizedBox(
+              height: 3.0.h,
+            ),
+            FutureBuilder(
+                future: PrintersDB().getNamePrinters(widget.data['printer']),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox.shrink();
+                  }
+                  return RichText(
+                      text: TextSpan(
+                          text: 'Impresora:',
+                          style: TextStyle(
+                              color: Colors.red.shade800,
+                              fontSize: 16.0.sp,
+                              fontWeight: FontWeight.bold),
+                          children: [
+                        TextSpan(
+                            text: ' ${snapshot.data}',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0.sp))
+                      ]));
+                }),
             SizedBox(
               height: 3.0.h,
             ),
@@ -155,32 +189,6 @@ class _ViewTicketState extends State<ViewTicket> {
             ),
             RichText(
                 text: TextSpan(
-                    text: 'Prioridad: ',
-                    style: TextStyle(
-                        color: Colors.red.shade800,
-                        fontSize: 16.0.sp,
-                        fontWeight: FontWeight.bold),
-                    children: [
-                  TextSpan(
-                      text: widget.data['priority'] == 'low'
-                          ? 'Baja'
-                          : widget.data['priority'] == 'medium'
-                              ? 'Media'
-                              : 'Alta',
-                      style: TextStyle(
-                          color: widget.data['priority'] == 'low'
-                              ? Colors.green
-                              : widget.data['priority'] == 'medium'
-                                  ? Colors.yellow.shade800
-                                  : Colors.redAccent,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16.0.sp))
-                ])),
-            SizedBox(
-              height: 3.0.h,
-            ),
-            RichText(
-                text: TextSpan(
                     text: 'Problema:',
                     style: TextStyle(
                         color: Colors.red.shade800,
@@ -188,7 +196,7 @@ class _ViewTicketState extends State<ViewTicket> {
                         fontWeight: FontWeight.bold),
                     children: [
                   TextSpan(
-                      text: ' ${widget.data['details']}',
+                      text: ' ${widget.data['description']}',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w400,

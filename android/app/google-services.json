@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "916414703858",
-    "firebase_url": "https://seguridad-21fe5-default-rtdb.firebaseio.com",
-    "project_id": "seguridad-21fe5",
-    "storage_bucket": "seguridad-21fe5.appspot.com"
+    "project_number": "148305019673",
+    "project_id": "tickets-infor",
+    "storage_bucket": "tickets-infor.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:916414703858:android:14291d158615108ac9086b",
+        "mobilesdk_app_id": "1:148305019673:android:4f615d211309a40f2dfb88",
         "android_client_info": {
-          "package_name": "com.molina.seguridad"
+          "package_name": "com.molina.informatica"
         }
       },
       "oauth_client": [
         {
-          "client_id": "916414703858-vd714fdqnn46qbtropq0pvrqucvgqeed.apps.googleusercontent.com",
+          "client_id": "148305019673-juek65ofiqmaq6q7fdh5ek7i5rmgg1kl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqJX4KTdWyuuM5E6uiOplLb5C3Tni8qEE"
+          "current_key": "AIzaSyDxmvt6cmv1riHQUFDMswBgH88b77qSenM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "916414703858-u8l0qikn4gbuafk0r9t2vmq1s9155b81.apps.googleusercontent.com",
+              "client_id": "148305019673-juek65ofiqmaq6q7fdh5ek7i5rmgg1kl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

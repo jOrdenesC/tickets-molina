@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SectorsDB {
-  Future getNameSector(String id) async {
+class DepartmentsDB {
+  Future getNameDepartment(String id) async {
     try {
       var data = await FirebaseFirestore.instance
-          .collection('sectors')
-          .where('id', isEqualTo: id)
-          .limit(1)
+          .collection('departamentos')
+          .doc(id)
           .get();
-      return data.docs.first['name'];
+      return data['name'];
     } catch (e) {
       print(e);
       return '';

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molina.seguridad">
    <application
-        android:label="Seguridad Pública"
+        android:label="Tickets Informatica"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
