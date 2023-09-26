@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tickets/database/addresses.dart';
 import 'package:tickets/database/printers.dart';
 import 'package:tickets/database/propertys.dart';
 import 'package:tickets/database/sectors.dart';
@@ -23,9 +24,11 @@ class _ViewTicketState extends State<ViewTicket> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        // ignore: sized_box_for_whitespace
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
               height: 4.0.h,
             ),
@@ -75,6 +78,32 @@ class _ViewTicketState extends State<ViewTicket> {
               height: 3.0.h,
             ),
             FutureBuilder(
+                future:
+                    AddressesDB().getNameAddresses(widget.data['addresses']),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox.shrink();
+                  }
+                  return RichText(
+                      text: TextSpan(
+                          text: 'Dirección:',
+                          style: TextStyle(
+                              color: Colors.red.shade800,
+                              fontSize: 16.0.sp,
+                              fontWeight: FontWeight.bold),
+                          children: [
+                        TextSpan(
+                            text: ' ${snapshot.data}',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0.sp))
+                      ]));
+                }),
+            SizedBox(
+              height: 3.0.h,
+            ),
+            FutureBuilder(
                 future: DepartmentsDB()
                     .getNameDepartment(widget.data['department']),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -97,6 +126,24 @@ class _ViewTicketState extends State<ViewTicket> {
                                 fontSize: 16.0.sp))
                       ]));
                 }),
+            SizedBox(
+              height: 3.0.h,
+            ),
+            RichText(
+                text: TextSpan(
+                    text: 'Sección / Oficina / Programa:',
+                    style: TextStyle(
+                        color: Colors.red.shade800,
+                        fontSize: 16.0.sp,
+                        fontWeight: FontWeight.bold),
+                    children: [
+                  TextSpan(
+                      text: ' ${widget.data['other']}',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0.sp))
+                ])),
             SizedBox(
               height: 3.0.h,
             ),
@@ -223,12 +270,12 @@ class _ViewTicketState extends State<ViewTicket> {
                         ));
                   },
                   child: Text(
-                    'Cerrar ticket',
+                    'Enviar a Revisión',
                     style: TextStyle(fontSize: 16.0.sp),
                   )),
             )
             // Text('Problema: ${widget.data['details']}')
-          ],
+          ]),
         ),
       ),
     );

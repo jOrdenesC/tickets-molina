@@ -1,6 +1,8 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tickets/pages/home_page.dart';
+import 'package:tickets/pages/network_tickets.dart';
+import 'package:tickets/pages/pending_all_tickets.dart';
 import 'package:tickets/pages/settings.dart';
 
 class MainPageUser extends StatefulWidget {
@@ -28,13 +30,20 @@ class _MainPageUserState extends State<MainPageUser> {
               iconUnselectedForegroundColor: Colors.white,
               iconBackgroundColor: Colors.red.shade900),
           icons: [
-            FluidNavBarIcon(icon: Icons.home_outlined),
+            FluidNavBarIcon(icon: Icons.print_outlined),
+            FluidNavBarIcon(icon: Icons.settings_ethernet_outlined),
+            FluidNavBarIcon(icon: Icons.pending_actions_outlined),
             FluidNavBarIcon(icon: Icons.person_2_outlined),
           ]),
       body: PageView(
         physics: const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
         controller: controller,
-        children: const [HomePage(), Settings()],
+        children: const [
+          HomePage(),
+          Network(),
+          PendingAllTickets(),
+          Settings()
+        ],
       ),
     );
   }

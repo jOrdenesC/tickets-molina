@@ -10,7 +10,6 @@ import '../pages/login.dart';
 
 class UsersDB {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-
   Future getDataUser(String uid) async {
     try {
       DocumentSnapshot res = await users.doc(uid).get();

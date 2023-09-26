@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DepartmentsDB {
-  Future getNameDepartment(String id) async {
+class AddressesDB {
+  Future getNameAddresses(String id) async {
     try {
       var data = await FirebaseFirestore.instance
-          .collection('departments')
+          .collection('addresses')
           .doc(id)
           .get();
       return data['name'];

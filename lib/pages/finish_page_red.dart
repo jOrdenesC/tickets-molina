@@ -5,16 +5,16 @@ import 'package:sizer/sizer.dart';
 import 'package:tickets/database/ticket.dart';
 import 'package:tickets/utils/motion.dart';
 
-class FinishPage extends StatefulWidget {
+class FinishPageRed extends StatefulWidget {
   final Map data;
   final String id;
-  const FinishPage({super.key, required this.data, required this.id});
+  const FinishPageRed({super.key, required this.data, required this.id});
 
   @override
-  State<FinishPage> createState() => _FinishPageState();
+  State<FinishPageRed> createState() => _FinishPageState();
 }
 
-class _FinishPageState extends State<FinishPage> {
+class _FinishPageState extends State<FinishPageRed> {
   TextEditingController text = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class _FinishPageState extends State<FinishPage> {
                 )),
               ),
             ));
-    var res = await TicketsDB().updateTicket(text.text, widget.id);
+    var res = await TicketsDB().updateTicketRed(text.text, widget.id);
     if (res) {
       Navigator.pop(context);
       Navigator.pop(context);
